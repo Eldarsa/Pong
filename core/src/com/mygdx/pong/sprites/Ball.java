@@ -8,7 +8,7 @@ import com.mygdx.pong.Pong;
 import java.util.Random;
 
 public class Ball {
-    public static float BALL_SPEED = 150;
+    public static float BALL_SPEED = 250;
 
     private Vector2 pos;
     private Vector2 vel;
@@ -34,17 +34,18 @@ public class Ball {
     }
 
     public void update(float dt) {
-        if (pos.y < 0) {
-            vel.y = -vel.y;
-        }
-        if (pos.y > Pong.HEIGHT-ballTexture.getHeight()) {
-            vel.y = -vel.y;
+        if (pos.y < 0 || pos.y > Pong.HEIGHT-ballTexture.getHeight()) {
+            vel.y = -vel.y;   // Bounce of top and bottom wall
         }
 
         vel.scl(dt);
         pos.add(vel.x, vel.y);
         vel.scl(1/dt);
         bounds.setPosition(pos.x, pos.y);
+    }
+
+    public boolean gameOver(){
+        return (pos.x < 0 || pos.x > Pong.WIDTH-ballTexture.getWidth());
     }
 
     public void dispose() {

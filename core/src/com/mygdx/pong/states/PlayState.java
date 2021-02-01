@@ -75,6 +75,11 @@ public class PlayState extends State {
         leftPadel.update(dt);
         rightPadel.update(dt);
         ball.update(dt);
+
+        if (ball.gameOver()) {
+            gsm.set(new EndState(gsm));
+            dispose();
+        }
     }
 
     @Override
