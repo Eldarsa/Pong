@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Vector2;
 import com.mygdx.pong.Pong;
 
@@ -36,6 +37,8 @@ public class EndState extends State{
     }
 
     @Override
+    public void render(SpriteBatch sb, ShapeRenderer sr) {
+
     public void update(float dt) {
         handleInput();
     }
