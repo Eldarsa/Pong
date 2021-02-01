@@ -2,21 +2,30 @@ package com.mygdx.pong.states;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Vector2;
 import com.mygdx.pong.Level.Level;
 import com.mygdx.pong.Level.Timer;
-import com.mygdx.pong.Player.Player;
-import com.mygdx.pong.Score.Score;
+import com.mygdx.pong.Pong;
 import com.mygdx.pong.Score.ScoreBoard;
 import com.mygdx.pong.sprites.Ball;
+import com.mygdx.pong.sprites.Midwall;
 import com.mygdx.pong.sprites.Padel;
+import com.mygdx.pong.sprites.Sidewall;
 
 public class PlayState extends State {
     private static final int MAX_TIME = 6;
 
+    public static final float wallDistanceFactor = 0.1f;
+    public static final float sideWallThickness = 0.01f * Pong.HEIGHT;
+    public static final float infoHeight = 0.95f;
+
     private Padel leftPadel;
     private Padel rightPadel;
     private Ball ball;
+    public Sidewall topWall;
+    public Sidewall botWall;
+    private Midwall midWall;
 
     private ScoreBoard scoreBoard;
     private Timer timer;
@@ -31,9 +40,13 @@ public class PlayState extends State {
         timer = new Timer(MAX_TIME);
         level = new Level(timer, 1);
 
-        leftPadel = new Padel(true);
-        rightPadel = new Padel(false);
-        ball = new Ball();
+        topWall = new Sidewall(true);
+        botWall = new Sidewall(false);
+        midWall = new Midwall();
+
+        ball = new Ball(this);
+        leftPadel = new Padel(true,  this);
+        rightPadel = new Padel(false, this);
 
         scoreBoard = new ScoreBoard(leftPadel, rightPadel);
         recentlyIncrementedLevel = true;
@@ -49,12 +62,12 @@ public class PlayState extends State {
         float returnAngle = (float) (Math.PI/4 * (2.0/padel.getTexture().getHeight()) * diff);
 
         if (padel.isLeftPadle()){
-            velX = (float) (Ball.BALL_SPEED * Math.cos(returnAngle));
+            velX = (float) (Ball.CHANGING_BALL_SPEED * Math.cos(returnAngle));
         } else {
-            velX = (float) -(Ball.BALL_SPEED * Math.cos(returnAngle));
+            velX = (float) -(Ball.CHANGING_BALL_SPEED * Math.cos(returnAngle));
         }
 
-        velY = (float) (Ball.BALL_SPEED * Math.sin(returnAngle));
+        velY = (float) (Ball.CHANGING_BALL_SPEED * Math.sin(returnAngle));
 
         return new Vector2(velX, velY);
     }
@@ -85,13 +98,14 @@ public class PlayState extends State {
         }
 
         if (ball.gameOver()) {
+            Ball.CHANGING_BALL_SPEED = Ball.ORIGINAL_BALL_SPEED;
             gsm.set(new EndState(gsm));
             dispose();
         }
     }
 
     @Override
-    public void render(SpriteBatch sb) {
+    public void render(SpriteBatch sb, ShapeRenderer sr) {
         sb.begin();
 
         scoreBoard.drawScore(sb);
@@ -103,6 +117,11 @@ public class PlayState extends State {
         sb.draw(ball.getTexture(), ball.getPos().x, ball.getPos().y);
 
         sb.end();
+
+        topWall.drawWall(sr);
+        botWall.drawWall(sr);
+        midWall.drawWall(sr);
+
     }
 
     @Override

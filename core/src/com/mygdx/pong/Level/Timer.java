@@ -4,11 +4,13 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.mygdx.pong.Pong;
+import com.mygdx.pong.states.PlayState;
 
 public class Timer {
 
     private long startTime;
     private Vector2 pos;
+    private float yFac;
     private int maxTime;
 
     private BitmapFont font;
@@ -19,7 +21,7 @@ public class Timer {
         startTime = System.currentTimeMillis();
         this.maxTime = maxTime;
 
-        pos = new Vector2(Pong.WIDTH*0.5f, Pong.HEIGHT*0.8f);
+        pos = new Vector2(Pong.WIDTH*0.4925f, Pong.HEIGHT* PlayState.infoHeight);
 
         font = new BitmapFont();
         fontsize = 1f;

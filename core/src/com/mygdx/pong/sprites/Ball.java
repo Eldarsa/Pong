@@ -4,11 +4,13 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.mygdx.pong.Pong;
+import com.mygdx.pong.states.PlayState;
 
 import java.util.Random;
 
 public class Ball {
-    public static float BALL_SPEED = 250;
+    public static final float ORIGINAL_BALL_SPEED = 250;
+    public static float CHANGING_BALL_SPEED = 250;
 
     private Vector2 pos;
     private Vector2 vel;
@@ -16,17 +18,24 @@ public class Ball {
     private Rectangle bounds;
     private Random rand;
 
-    public Ball() {
+    private float topBound;
+    private float botBound;
+
+    public Ball(PlayState ps) {
         ballTexture = new Texture("ball11.png");
         pos = new Vector2(Pong.WIDTH/2 - ballTexture.getWidth()/2, Pong.HEIGHT/2 - ballTexture.getHeight()/2);
         bounds = new Rectangle(pos.x, pos.y, ballTexture.getWidth(), ballTexture.getHeight());
 
         rand = new Random(2);
         if (rand.nextInt() > 0) {
-            vel = new Vector2(BALL_SPEED, 0);
+            vel = new Vector2(CHANGING_BALL_SPEED, 0);
         } else {
-            vel = new Vector2(-BALL_SPEED, 0);
+            vel = new Vector2(-CHANGING_BALL_SPEED, 0);
         }
+
+        topBound = ps.topWall.getPos().y - ballTexture.getHeight();
+        botBound = ps.botWall.getPos().y + ps.botWall.getWallHeight();
+
     }
 
     public Rectangle getBounds() {
@@ -34,7 +43,8 @@ public class Ball {
     }
 
     public void update(float dt) {
-        if (pos.y < 0 || pos.y > Pong.HEIGHT-ballTexture.getHeight()) {
+
+        if (pos.y < botBound || pos.y > topBound) {
             vel.y = -vel.y;   // Bounce of top and bottom wall
         }
 

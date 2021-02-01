@@ -2,10 +2,10 @@ package com.mygdx.pong.Level;
 
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.math.Vector;
 import com.badlogic.gdx.math.Vector2;
 import com.mygdx.pong.Pong;
 import com.mygdx.pong.sprites.Ball;
+import com.mygdx.pong.states.PlayState;
 
 public class Level {
     public static final int BALL_SPEED_INCREMENT = 100;
@@ -23,7 +23,7 @@ public class Level {
         this.timer.reset();
 
         // Draw parameters
-        pos = new Vector2(Pong.WIDTH*0.1f, Pong.HEIGHT*0.8f);
+        pos = new Vector2(Pong.WIDTH*0.1f, Pong.HEIGHT * PlayState.infoHeight);
         font = new BitmapFont();
         fontsize = 1f;
         font.getData().setScale(fontsize);
@@ -32,7 +32,8 @@ public class Level {
     public void incrementLevel() {
         currentLevel+=1;
         timer.reset();
-        Ball.BALL_SPEED += BALL_SPEED_INCREMENT;
+        Ball.CHANGING_BALL_SPEED += BALL_SPEED_INCREMENT;
+        System.out.println(String.format("Ball speed: %.1f", Ball.CHANGING_BALL_SPEED));
     }
 
     public void drawLevel(SpriteBatch sb) {
