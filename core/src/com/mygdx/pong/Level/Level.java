@@ -33,7 +33,10 @@ public class Level {
         currentLevel+=1;
         timer.reset();
         Ball.CHANGING_BALL_SPEED += BALL_SPEED_INCREMENT;
-        System.out.println(String.format("Ball speed: %.1f", Ball.CHANGING_BALL_SPEED));
+    }
+
+    public void reset(){
+        currentLevel = 1;
     }
 
     public void drawLevel(SpriteBatch sb) {

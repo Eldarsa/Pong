@@ -105,9 +105,11 @@ public class PlayState extends State {
                 leftPadel.incrementScore(1);
             }
 
-            ball.reset();
             rightPadel.resetPos();
             leftPadel.resetPos();
+            timer.reset();
+            level.reset();
+            ball.reset();
 
             gsm.push(new PauseState(gsm));
         }

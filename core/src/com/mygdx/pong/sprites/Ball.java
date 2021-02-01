@@ -26,7 +26,7 @@ public class Ball {
         pos = new Vector2(Pong.WIDTH/2 - ballTexture.getWidth()/2, Pong.HEIGHT/2 - ballTexture.getHeight()/2);
         bounds = new Rectangle(pos.x, pos.y, ballTexture.getWidth(), ballTexture.getHeight());
 
-        rand = new Random(2);
+        rand = new Random();
         if (rand.nextInt() > 0) {
             vel = new Vector2(CHANGING_BALL_SPEED, 0);
         } else {
@@ -61,6 +61,11 @@ public class Ball {
     public void reset() {
         pos.set(Pong.WIDTH/2 - ballTexture.getWidth()/2, Pong.HEIGHT/2 - ballTexture.getHeight()/2);
         CHANGING_BALL_SPEED = ORIGINAL_BALL_SPEED;
+        if (rand.nextInt() > 0) {
+            vel.set(CHANGING_BALL_SPEED, 0);
+        } else {
+            vel.set(-CHANGING_BALL_SPEED, 0);
+        }
     }
 
     public void dispose() {
