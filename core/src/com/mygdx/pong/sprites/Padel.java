@@ -9,21 +9,22 @@ import com.mygdx.pong.Score.Score;
 
 public class Padel {
     public static final int DIST_FROM_WALL = 20;
-    private static final int PADEL_SPEED = 10;
+    private static final int PADEL_SPEED = 4;
 
     private Score score;
     private Vector2 pos;
     private Texture padelTexture;
-//    private int score;
+    private boolean leftPadle;
 
-    public Padel(boolean leftPaddle) {
+    public Padel(boolean leftPadle) {
         score = new Score();
+        this.leftPadle = leftPadle;
 
         padelTexture = new Texture("padel100.png");
         pos = new Vector2(0, 0);
         pos.y = ((float) Pong.HEIGHT / (float) 2) - ((float) padelTexture.getHeight() / (float) 2);
 
-        if (leftPaddle) {
+        if (leftPadle) {
             pos.x = DIST_FROM_WALL;
         }
         else {
@@ -44,11 +45,20 @@ public class Padel {
     }
 
     public void handleInput() {
-        if (Gdx.input.isKeyPressed(Input.Keys.W) || Gdx.input.isKeyPressed(Input.Keys.UP)) {
-            pos.y += PADEL_SPEED;
+        if (leftPadle) {
+            if (Gdx.input.isKeyPressed(Input.Keys.W) && (pos.y + padelTexture.getHeight() < Pong.HEIGHT)) {
+                pos.y += PADEL_SPEED;
+            }
+            else if (Gdx.input.isKeyPressed(Input.Keys.S) && (pos.y > 0)) {
+                pos.y -= PADEL_SPEED;
+            }
         }
-        else if (Gdx.input.isKeyPressed(Input.Keys.S) || Gdx.input.isKeyPressed(Input.Keys.DOWN)) {
-            pos.y -= PADEL_SPEED;
+        else if (!leftPadle) {
+            if (Gdx.input.isKeyPressed(Input.Keys.UP) && (pos.y + padelTexture.getHeight() < Pong.HEIGHT)) {
+                pos.y += PADEL_SPEED;
+            } else if (Gdx.input.isKeyPressed(Input.Keys.DOWN) && (pos.y > 0)) {
+                pos.y -= PADEL_SPEED;
+            }
         }
     }
 
