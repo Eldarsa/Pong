@@ -36,4 +36,6 @@ public class Level {
         font.draw(sb, "Level " + String.valueOf(currentLevel), pos.x, pos.y);
     }
 
+    // TODO: Add incrementlevel functionality that increases the ball speed etc..
+
 }
