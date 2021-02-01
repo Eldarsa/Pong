@@ -25,7 +25,7 @@ public class ScoreBoard {
         p2 = padel2;
 
         xFac = 0.2f;
-        yFac = 0.3f;
+        yFac = 0.5f;
 
         font = new BitmapFont();
         fontsize = 1f;

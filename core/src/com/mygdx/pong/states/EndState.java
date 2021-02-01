@@ -2,6 +2,7 @@ package com.mygdx.pong.states;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 
 public class EndState extends State{
 
@@ -16,7 +17,7 @@ public class EndState extends State{
     }
 
     @Override
-    public void render(SpriteBatch sb) {
+    public void render(SpriteBatch sb, ShapeRenderer sr) {
 
     }
 

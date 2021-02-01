@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector;
 import com.badlogic.gdx.math.Vector2;
 import com.mygdx.pong.Pong;
+import com.mygdx.pong.states.PlayState;
 
 public class Level {
 
@@ -21,7 +22,7 @@ public class Level {
         this.timer.reset();
 
         // Draw parameters
-        pos = new Vector2(Pong.WIDTH*0.1f, Pong.HEIGHT*0.8f);
+        pos = new Vector2(Pong.WIDTH*0.1f, Pong.HEIGHT * PlayState.infoHeight);
         font = new BitmapFont();
         fontsize = 1f;
         font.getData().setScale(fontsize);
