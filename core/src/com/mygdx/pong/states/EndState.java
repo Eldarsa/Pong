@@ -36,15 +36,12 @@ public class EndState extends State{
         }
     }
 
-    @Override
-    public void render(SpriteBatch sb, ShapeRenderer sr) {
-
     public void update(float dt) {
         handleInput();
     }
 
     @Override
-    public void render(SpriteBatch sb) {
+    public void render(SpriteBatch sb, ShapeRenderer sr) {
         sb.begin();
         font.draw(sb, "GAME OVER!\n  Play Again?", fontPos.x, fontPos.y);
         sb.draw(playBtn, (Pong.WIDTH/2) - (playBtn.getWidth()/2), Pong.HEIGHT/2 - playBtn.getHeight()/2);
