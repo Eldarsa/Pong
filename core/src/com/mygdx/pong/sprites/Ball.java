@@ -54,8 +54,13 @@ public class Ball {
         bounds.setPosition(pos.x, pos.y);
     }
 
-    public boolean gameOver(){
+    public boolean setOver(){
         return (pos.x < 0 || pos.x > Pong.WIDTH-ballTexture.getWidth());
+    }
+
+    public void reset() {
+        pos.set(Pong.WIDTH/2 - ballTexture.getWidth()/2, Pong.HEIGHT/2 - ballTexture.getHeight()/2);
+        CHANGING_BALL_SPEED = ORIGINAL_BALL_SPEED;
     }
 
     public void dispose() {

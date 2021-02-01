@@ -31,7 +31,6 @@ public class Padel {
         padelTexture = new Texture("padel100.png");
         pos = new Vector2(0, 0);
         pos.y = ((float) Pong.HEIGHT / (float) 2) - ((float) padelTexture.getHeight() / (float) 2);
-        bounds = new Rectangle(pos.x, pos.y, padelTexture.getWidth(), padelTexture.getHeight());
 
         if (leftPadle) {
             pos.x = DIST_FROM_WALL;
@@ -40,6 +39,7 @@ public class Padel {
             pos.x = Pong.WIDTH - DIST_FROM_WALL;
         }
 
+        bounds = new Rectangle(pos.x, pos.y, padelTexture.getWidth(), padelTexture.getHeight());
         topBound = ps.topWall.getPos().y;
         botBound = ps.botWall.getPos().y + ps.botWall.getWallHeight();
     }
@@ -48,7 +48,7 @@ public class Padel {
         return score.getScore();
     }
 
-    public void setScore(int points) {
+    public void incrementScore(int points) {
         this.score.addScore(points);
     }
 
@@ -94,5 +94,9 @@ public class Padel {
 
     public boolean isLeftPadle() {
         return leftPadle;
+    }
+
+    public void resetPos() {
+        pos.y = ((float) Pong.HEIGHT / (float) 2) - ((float) padelTexture.getHeight() / (float) 2);
     }
 }

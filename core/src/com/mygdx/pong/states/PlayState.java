@@ -97,8 +97,22 @@ public class PlayState extends State {
             recentlyIncrementedLevel = false;
         }
 
-        if (ball.gameOver()) {
-            Ball.CHANGING_BALL_SPEED = Ball.ORIGINAL_BALL_SPEED;
+        if (ball.setOver()) {
+            if (ball.getPos().x < Pong.WIDTH/2) {
+                rightPadel.incrementScore(1);
+            }
+            else if (ball.getPos().x > Pong.WIDTH/2) {
+                leftPadel.incrementScore(1);
+            }
+
+            ball.reset();
+            rightPadel.resetPos();
+            leftPadel.resetPos();
+
+            gsm.push(new PauseState(gsm));
+        }
+
+        if (rightPadel.getScore() >= targetScore || leftPadel.getScore() >= targetScore) {
             gsm.set(new EndState(gsm));
             dispose();
         }
