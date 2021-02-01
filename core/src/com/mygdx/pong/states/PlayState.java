@@ -33,7 +33,10 @@ public class PlayState extends State {
 
     @Override
     public void update(float dt) {
-
+        handleInput();
+        leftPadel.update(dt);
+        rightPadel.update(dt);
+        ball.update(dt);
     }
 
     @Override
@@ -41,7 +44,6 @@ public class PlayState extends State {
         sb.begin();
 
         scoreBoard.drawScore(sb);
-        spriteManager.drawSprites(sb); //TODO: Implement spritemanager?
 
         sb.draw(leftPadel.getTexture(), leftPadel.getPos().x, leftPadel.getPos().y);
         sb.draw(rightPadel.getTexture(), rightPadel.getPos().x, rightPadel.getPos().y);
@@ -52,7 +54,8 @@ public class PlayState extends State {
 
     @Override
     public void handleInput() {
-
+        leftPadel.handleInput();
+        rightPadel.handleInput();
     }
 
     @Override
