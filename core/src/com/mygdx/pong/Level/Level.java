@@ -5,8 +5,10 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector;
 import com.badlogic.gdx.math.Vector2;
 import com.mygdx.pong.Pong;
+import com.mygdx.pong.sprites.Ball;
 
 public class Level {
+    public static final int BALL_SPEED_INCREMENT = 100;
 
     private int currentLevel;
     private Vector2 pos;
@@ -27,15 +29,16 @@ public class Level {
         font.getData().setScale(fontsize);
     }
 
-    public void incrementLevel(float incBallSpeed) {
+    public void incrementLevel() {
         currentLevel+=1;
         timer.reset();
+        Ball.BALL_SPEED += BALL_SPEED_INCREMENT;
     }
 
     public void drawLevel(SpriteBatch sb) {
         font.draw(sb, "Level " + String.valueOf(currentLevel), pos.x, pos.y);
     }
 
-    // TODO: Add incrementlevel functionality that increases the ball speed etc..
+// TODO: Add incrementlevel functionality that increases the ball speed etc..
 
 }

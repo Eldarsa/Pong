@@ -12,6 +12,8 @@ import com.mygdx.pong.sprites.Ball;
 import com.mygdx.pong.sprites.Padel;
 
 public class PlayState extends State {
+    private static final int MAX_TIME = 6;
+
     private Padel leftPadel;
     private Padel rightPadel;
     private Ball ball;
@@ -20,12 +22,13 @@ public class PlayState extends State {
     private Timer timer;
     private int targetScore;
     private Level level;
+    private boolean recentlyIncrementedLevel;
 
     protected PlayState(GameStateManager gsm) {
         super(gsm);
 
         targetScore = 5;
-        timer = new Timer(21);
+        timer = new Timer(MAX_TIME);
         level = new Level(timer, 1);
 
         leftPadel = new Padel(true);
@@ -33,12 +36,10 @@ public class PlayState extends State {
         ball = new Ball();
 
         scoreBoard = new ScoreBoard(leftPadel, rightPadel);
+        recentlyIncrementedLevel = true;
     }
 
     private Vector2 calculateReturnDirection(Padel padel, Ball ball){
-//        if (ball.getPos().x < padel.getPos().x || ball.getPos().x > (padel.getPos().y + padel.getTexture().getHeight())) {
-//            return new Vector2(0, 0);
-//        }
         float velX;
         float velY;
         float padelPosYCenter = padel.getPos().y + padel.getTexture().getHeight() / 2;
@@ -54,7 +55,6 @@ public class PlayState extends State {
         }
 
         velY = (float) (Ball.BALL_SPEED * Math.sin(returnAngle));
-        System.out.println(String.format("returnAngle: %.1f \t velX: %.1f \t velY: %.1f", returnAngle, velX, velY));
 
         return new Vector2(velX, velY);
     }
@@ -75,6 +75,14 @@ public class PlayState extends State {
         leftPadel.update(dt);
         rightPadel.update(dt);
         ball.update(dt);
+
+        if ((timer.getElapsedSeconds() % timer.getMaxTime() == 0) && !recentlyIncrementedLevel){
+            level.incrementLevel();
+            recentlyIncrementedLevel = true;
+        }
+        if ((timer.getElapsedSeconds() + (timer.getMaxTime()/2)) % timer.getMaxTime() == 0) {
+            recentlyIncrementedLevel = false;
+        }
 
         if (ball.gameOver()) {
             gsm.set(new EndState(gsm));
