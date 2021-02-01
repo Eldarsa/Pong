@@ -2,6 +2,8 @@ package com.mygdx.pong.states;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
+import com.mygdx.pong.Level.Level;
+import com.mygdx.pong.Level.Timer;
 import com.mygdx.pong.Player.Player;
 import com.mygdx.pong.Score.Score;
 import com.mygdx.pong.Score.ScoreBoard;
@@ -14,15 +16,16 @@ public class PlayState extends State {
     private Ball ball;
 
     private ScoreBoard scoreBoard;
-
+    private Timer timer;
     private int targetScore;
-    private int level;
+    private Level level;
 
     protected PlayState(GameStateManager gsm) {
         super(gsm);
-        
-        level = 1;
-        //targetScore = Get from config
+
+        targetScore = 5;
+        timer = new Timer(21);
+        level = new Level(timer, 1);
 
         leftPadel = new Padel(true);
         rightPadel = new Padel(false);
@@ -44,6 +47,8 @@ public class PlayState extends State {
         sb.begin();
 
         scoreBoard.drawScore(sb);
+        timer.drawTimer(sb);
+        level.drawLevel(sb);
 
         sb.draw(leftPadel.getTexture(), leftPadel.getPos().x, leftPadel.getPos().y);
         sb.draw(rightPadel.getTexture(), rightPadel.getPos().x, rightPadel.getPos().y);
@@ -67,10 +72,6 @@ public class PlayState extends State {
 
     private void updateScore(int player) {
 
-    }
-
-    private void increaseLevel(){
-        level+=1;
     }
 
 }

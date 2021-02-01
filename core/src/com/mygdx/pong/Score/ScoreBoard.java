@@ -24,15 +24,15 @@ public class ScoreBoard {
         p1 = padel1;
         p2 = padel2;
 
-        xFac = 0.1f;
-        yFac = 0.2f;
+        xFac = 0.2f;
+        yFac = 0.3f;
 
         font = new BitmapFont();
-        fontsize = 0.1f;
+        fontsize = 1f;
         font.getData().setScale(fontsize);
 
         pos1 = new Vector3(Pong.WIDTH*xFac, Pong.HEIGHT*yFac, 0);
-        pos2 = new Vector3(Pong.WIDTH*(1-xFac), Pong.HEIGHT*(1-yFac), 0);
+        pos2 = new Vector3(Pong.WIDTH*(1-xFac), Pong.HEIGHT*yFac, 0);
     }
 
     public void drawScore(SpriteBatch sb) {
