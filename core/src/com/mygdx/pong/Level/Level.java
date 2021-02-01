@@ -2,12 +2,13 @@ package com.mygdx.pong.Level;
 
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.math.Vector;
 import com.badlogic.gdx.math.Vector2;
 import com.mygdx.pong.Pong;
+import com.mygdx.pong.sprites.Ball;
 import com.mygdx.pong.states.PlayState;
 
 public class Level {
+    public static final int BALL_SPEED_INCREMENT = 100;
 
     private int currentLevel;
     private Vector2 pos;
@@ -28,15 +29,17 @@ public class Level {
         font.getData().setScale(fontsize);
     }
 
-    public void incrementLevel(float incBallSpeed) {
+    public void incrementLevel() {
         currentLevel+=1;
         timer.reset();
+        Ball.CHANGING_BALL_SPEED += BALL_SPEED_INCREMENT;
+        System.out.println(String.format("Ball speed: %.1f", Ball.CHANGING_BALL_SPEED));
     }
 
     public void drawLevel(SpriteBatch sb) {
         font.draw(sb, "Level " + String.valueOf(currentLevel), pos.x, pos.y);
     }
 
-    // TODO: Add incrementlevel functionality that increases the ball speed etc..
+// TODO: Add incrementlevel functionality that increases the ball speed etc..
 
 }

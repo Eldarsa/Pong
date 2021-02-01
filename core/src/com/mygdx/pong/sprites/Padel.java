@@ -7,6 +7,7 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.mygdx.pong.Pong;
 import com.mygdx.pong.Score.Score;
+import com.mygdx.pong.states.PlayState;
 
 public class Padel {
     public static final int DIST_FROM_WALL = 20;
@@ -17,8 +18,13 @@ public class Padel {
     private Texture padelTexture;
     private boolean leftPadle;
     private Rectangle bounds;
+    private PlayState ps;
 
-    public Padel(boolean leftPadle) {
+    private float topBound;
+    private float botBound;
+
+
+    public Padel(boolean leftPadle, PlayState ps) {
         score = new Score();
         this.leftPadle = leftPadle;
 
@@ -33,6 +39,9 @@ public class Padel {
         else {
             pos.x = Pong.WIDTH - DIST_FROM_WALL;
         }
+
+        topBound = ps.topWall.getPos().y;
+        botBound = ps.botWall.getPos().y + ps.botWall.getWallHeight();
     }
 
     public int getScore() {
@@ -53,18 +62,19 @@ public class Padel {
     }
 
     public void handleInput() {
+
         if (leftPadle) {
-            if (Gdx.input.isKeyPressed(Input.Keys.W) && (pos.y + padelTexture.getHeight() < Pong.HEIGHT)) {
+            if (Gdx.input.isKeyPressed(Input.Keys.W) && (pos.y + padelTexture.getHeight() < topBound)) {
                 pos.y += PADEL_SPEED;
             }
-            else if (Gdx.input.isKeyPressed(Input.Keys.S) && (pos.y > 0)) {
+            else if (Gdx.input.isKeyPressed(Input.Keys.S) && (pos.y > botBound)) {
                 pos.y -= PADEL_SPEED;
             }
         }
         else if (!leftPadle) {
-            if (Gdx.input.isKeyPressed(Input.Keys.UP) && (pos.y + padelTexture.getHeight() < Pong.HEIGHT)) {
+            if (Gdx.input.isKeyPressed(Input.Keys.UP) && (pos.y + padelTexture.getHeight() < topBound)) {
                 pos.y += PADEL_SPEED;
-            } else if (Gdx.input.isKeyPressed(Input.Keys.DOWN) && (pos.y > 0)) {
+            } else if (Gdx.input.isKeyPressed(Input.Keys.DOWN) && (pos.y > botBound)) {
                 pos.y -= PADEL_SPEED;
             }
         }

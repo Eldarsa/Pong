@@ -9,7 +9,8 @@ import com.mygdx.pong.states.PlayState;
 import java.util.Random;
 
 public class Ball {
-    public static float BALL_SPEED = 250;
+    public static final float ORIGINAL_BALL_SPEED = 250;
+    public static float CHANGING_BALL_SPEED = 250;
 
     private Vector2 pos;
     private Vector2 vel;
@@ -27,9 +28,9 @@ public class Ball {
 
         rand = new Random(2);
         if (rand.nextInt() > 0) {
-            vel = new Vector2(BALL_SPEED, 0);
+            vel = new Vector2(CHANGING_BALL_SPEED, 0);
         } else {
-            vel = new Vector2(-BALL_SPEED, 0);
+            vel = new Vector2(-CHANGING_BALL_SPEED, 0);
         }
 
         topBound = ps.topWall.getPos().y - ballTexture.getHeight();

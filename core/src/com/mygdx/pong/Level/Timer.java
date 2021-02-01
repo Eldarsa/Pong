@@ -48,4 +48,7 @@ public class Timer {
         startTime = System.currentTimeMillis();
     }
 
+    public int getMaxTime() {
+        return maxTime;
+    }
 }
