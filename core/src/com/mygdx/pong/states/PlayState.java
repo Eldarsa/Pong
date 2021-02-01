@@ -36,7 +36,7 @@ public class PlayState extends State {
     protected PlayState(GameStateManager gsm) {
         super(gsm);
 
-        targetScore = 5;
+        targetScore = 21;
         timer = new Timer(21);
         level = new Level(timer, 1);
 
