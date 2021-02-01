@@ -37,4 +37,5 @@ public class Ball {
     public Texture getTexture() {
         return ballTexture;
     }
+
 }
