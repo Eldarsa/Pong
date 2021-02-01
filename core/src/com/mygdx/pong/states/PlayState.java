@@ -18,7 +18,10 @@ public class PlayState extends State {
 
     @Override
     public void update(float dt) {
-
+        handleInput();
+        leftPadel.update(dt);
+        rightPadel.update(dt);
+        ball.update(dt);
     }
 
     @Override
@@ -32,7 +35,8 @@ public class PlayState extends State {
 
     @Override
     public void handleInput() {
-
+        leftPadel.handleInput();
+        rightPadel.handleInput();
     }
 
     @Override

@@ -9,8 +9,12 @@ public class Ball {
     private Texture ballTexture;
 
     public Ball() {
-        pos = new Vector2(Pong.WIDTH/2 - ballTexture.getWidth()/2, Pong.HEIGHT/2 - ballTexture.getHeight()/2);
         ballTexture = new Texture("ball11.png");
+        pos = new Vector2(Pong.WIDTH/2 - ballTexture.getWidth()/2, Pong.HEIGHT/2 - ballTexture.getHeight()/2);
+    }
+
+    public void update(float dt) {
+
     }
 
     public void dispose() {
