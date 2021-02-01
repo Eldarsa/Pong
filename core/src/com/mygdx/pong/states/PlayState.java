@@ -24,8 +24,8 @@ public class PlayState extends State {
     private Padel leftPadel;
     private Padel rightPadel;
     private Ball ball;
-    private Sidewall topWall;
-    private Sidewall botWall;
+    public Sidewall topWall;
+    public Sidewall botWall;
     private Midwall midWall;
 
     private ScoreBoard scoreBoard;
@@ -42,10 +42,10 @@ public class PlayState extends State {
 
         leftPadel = new Padel(true);
         rightPadel = new Padel(false);
-        ball = new Ball();
         topWall = new Sidewall(true);
         botWall = new Sidewall(false);
         midWall = new Midwall();
+        ball = new Ball(this);
 
         scoreBoard = new ScoreBoard(leftPadel, rightPadel);
     }

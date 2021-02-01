@@ -46,4 +46,10 @@ public class Sidewall extends Wall {
     public void dispose() {
         super.dispose();
     }
+
+    public float getWallHeight() { return wallHeight; }
+
+    public float getWallWidth(){ return wallWidth; }
+
+    public Vector2 getPos() { return pos; }
 }
