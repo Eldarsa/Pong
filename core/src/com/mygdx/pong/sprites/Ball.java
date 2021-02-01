@@ -7,7 +7,7 @@ import com.mygdx.pong.Pong;
 import java.util.Random;
 
 public class Ball {
-    public float SPEED;
+    public float SPEED = 10;
 
     private Vector2 pos;
     private Vector2 vel;
