@@ -13,8 +13,6 @@ public class PlayState extends State {
     private Padel rightPadel;
     private Ball ball;
 
-    private Player player1;
-    private Player player2;
     private ScoreBoard scoreBoard;
 
     private int targetScore;
