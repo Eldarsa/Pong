@@ -9,3 +9,10 @@ Left player controll the padel with the keys W and S and right player with the a
 
 # Theory
 ## Task 4.a
+
+
+## Task 4.b
+
+## Task 4.c
+
+
