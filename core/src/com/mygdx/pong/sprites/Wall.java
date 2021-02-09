@@ -13,20 +13,14 @@ public abstract class Wall {
     private int wallWidth;
     private int wallHeight;
 
-    public Wall() {
-
-    }
+    public Wall() { }
 
     public Rectangle getRectangle() {
         return border;
     }
 
-    public void drawWall(ShapeRenderer sr) {
+    public void drawWall(ShapeRenderer sr) { }
 
-    }
-
-    public void dispose() {
-
-    }
+    public void dispose() { }
 
 }

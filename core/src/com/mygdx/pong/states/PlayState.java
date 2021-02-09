@@ -62,6 +62,58 @@ public class PlayState extends State {
         return INSTANCE;
     }
 
+    @Override
+    public void update(float dt) {
+        handleInput();
+
+        detectCollision(leftPadel, ball);
+        detectCollision(rightPadel, ball);
+
+        leftPadel.update(dt);
+        rightPadel.update(dt);
+        ball.update(dt);
+
+        checkLevel();
+        checkSet();
+        checkWinner();
+    }
+
+    @Override
+    public void render(SpriteBatch sb, ShapeRenderer sr) {
+        sb.begin();
+
+        scoreBoard.drawScore(sb);
+        timer.drawTimer(sb);
+        level.drawLevel(sb);
+
+        sb.draw(leftPadel.getTexture(), leftPadel.getPos().x, leftPadel.getPos().y);
+        sb.draw(rightPadel.getTexture(), rightPadel.getPos().x, rightPadel.getPos().y);
+        sb.draw(ball.getTexture(), ball.getPos().x, ball.getPos().y);
+
+        sb.end();
+
+        topWall.drawWall(sr);
+        botWall.drawWall(sr);
+        midWall.drawWall(sr);
+    }
+
+    @Override
+    public void handleInput() {
+        leftPadel.handleInput();
+        rightPadel.handleInput();
+    }
+
+    @Override
+    public void dispose() {
+        leftPadel.dispose();
+        rightPadel.dispose();
+        ball.dispose();
+    }
+
+    private void updateScore(int player) {
+
+    }
+
     private Vector2 calculateReturnDirection(Padel padel, Ball ball){
         float velX;
         float velY;
@@ -88,25 +140,7 @@ public class PlayState extends State {
         }
     }
 
-    @Override
-    public void update(float dt) {
-        handleInput();
-
-        detectCollision(leftPadel, ball);
-        detectCollision(rightPadel, ball);
-
-        leftPadel.update(dt);
-        rightPadel.update(dt);
-        ball.update(dt);
-
-        if ((timer.getElapsedSeconds() % timer.getMaxTime() == 0) && !recentlyIncrementedLevel){
-            level.incrementLevel();
-            recentlyIncrementedLevel = true;
-        }
-        if ((timer.getElapsedSeconds() + (timer.getMaxTime()/2)) % timer.getMaxTime() == 0) {
-            recentlyIncrementedLevel = false;
-        }
-
+    private void checkSet() {
         if (ball.setOver()) {
             if (ball.getPos().x < Pong.WIDTH/2) {
                 rightPadel.incrementScore(1);
@@ -123,48 +157,23 @@ public class PlayState extends State {
 
             gsm.push(PauseState.getINSTANCE());
         }
+    }
 
+    private void checkWinner(){
         if (rightPadel.getScore() >= targetScore || leftPadel.getScore() >= targetScore) {
             gsm.set(EndState.getINSTANCE());
             dispose();
         }
     }
 
-    @Override
-    public void render(SpriteBatch sb, ShapeRenderer sr) {
-        sb.begin();
-
-        scoreBoard.drawScore(sb);
-        timer.drawTimer(sb);
-        level.drawLevel(sb);
-
-        sb.draw(leftPadel.getTexture(), leftPadel.getPos().x, leftPadel.getPos().y);
-        sb.draw(rightPadel.getTexture(), rightPadel.getPos().x, rightPadel.getPos().y);
-        sb.draw(ball.getTexture(), ball.getPos().x, ball.getPos().y);
-
-        sb.end();
-
-        topWall.drawWall(sr);
-        botWall.drawWall(sr);
-        midWall.drawWall(sr);
-
-    }
-
-    @Override
-    public void handleInput() {
-        leftPadel.handleInput();
-        rightPadel.handleInput();
-    }
-
-    @Override
-    public void dispose() {
-        leftPadel.dispose();
-        rightPadel.dispose();
-        ball.dispose();
-    }
-
-    private void updateScore(int player) {
-
+    private void checkLevel() {
+        if ((timer.getElapsedSeconds() % timer.getMaxTime() == 0) && !recentlyIncrementedLevel){
+            level.incrementLevel();
+            recentlyIncrementedLevel = true;
+        }
+        if ((timer.getElapsedSeconds() + (timer.getMaxTime()/2)) % timer.getMaxTime() == 0) {
+            recentlyIncrementedLevel = false;
+        }
     }
 
 }
