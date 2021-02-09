@@ -13,8 +13,15 @@ public class GameStateManager {
 
     private Stack<State> states;
 
-    /*Initialize gms with state stack*/
-    public GameStateManager() { states = new Stack<State>(); }
+
+    public static GameStateManager getINSTANCE() {
+        if (INSTANCE == null) {
+            INSTANCE = new GameStateManager();
+        }
+        return INSTANCE;
+    }
+
+    private GameStateManager() { states = new Stack<State>(); }
 
     public GameStateManager getINSTANCE() {
         if(INSTANCE == null){
