@@ -11,14 +11,15 @@ import com.mygdx.pong.Pong;
 
 public class EndState extends State{
 
-    private Texture playBtn;
-    private BitmapFont font;
-    private float fontsize;
-    private Vector2 fontPos;
+    private static EndState INSTANCE = null;
 
+    private static Texture playBtn;
+    private static BitmapFont font;
+    private static float fontsize;
+    private static Vector2 fontPos;
 
-    public EndState(GameStateManager gsm){
-        super(gsm);
+    private EndState(){
+        super(gsm.getINSTANCE());
         playBtn = new Texture("playbtn.PNG");
 
         font = new BitmapFont();
@@ -26,6 +27,13 @@ public class EndState extends State{
         font.getData().setScale(fontsize);
         font.setColor(Color.RED);
         fontPos = new Vector2(50, Pong.HEIGHT-50);
+    }
+
+    public EndState getINSTANCE() {
+        if (INSTANCE == null) {
+            INSTANCE = new EndState(gsm);
+        }
+        return INSTANCE;
     }
 
     @Override

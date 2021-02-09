@@ -9,10 +9,18 @@ import com.mygdx.pong.Pong;
 public class MenuState extends State{
 
     private Texture playBtn;
+    private MenuState INSTANCE = null;
 
     public MenuState(GameStateManager gsm){
         super(gsm);
         playBtn = new Texture("playbtn.PNG");
+    }
+
+    public MenuState getINSTANCE() {
+        if (INSTANCE == null) {
+            INSTANCE = new MenuState(gsm);
+        }
+        return INSTANCE;
     }
 
     @Override
