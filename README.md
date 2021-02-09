@@ -9,7 +9,13 @@ Left player controll the padel with the keys W and S and right player with the a
 
 # Theory
 ## Task 4.a
-
+- Observer: Architectural
+- State: Architectural
+- Template method: Design
+- MVC: Architectural
+- Abstract factory: Design
+- ECS: Architectural
+- Pipe and filter: Architectural
 
 ## Task 4.b
 
