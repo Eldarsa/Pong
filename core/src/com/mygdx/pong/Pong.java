@@ -15,7 +15,7 @@ public class Pong extends ApplicationAdapter {
 	public static final int HEIGHT = 700;
 	public static final String TITLE = "Pong";
 
-	private GameStateManager gsm;
+	public static GameStateManager gsm ;
 	private SpriteBatch sb;
 	private ShapeRenderer sr;
 
@@ -25,7 +25,7 @@ public class Pong extends ApplicationAdapter {
 		sb = new SpriteBatch();
 		sr = new ShapeRenderer();
 		sr.setProjectionMatrix(sb.getProjectionMatrix());
-		gsm = new GameStateManager();
+		gsm = GameStateManager.getINSTANCE();
 		Gdx.gl.glClearColor(0,0,0,1);
 		gsm.push(new MenuState(gsm));
 	}

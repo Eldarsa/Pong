@@ -8,10 +8,19 @@ import java.util.Stack;
 
 public class GameStateManager {
 
+    private static GameStateManager INSTANCE = null;
+
     private Stack<State> states;
 
-    /*Initialize gms with state stack*/
-    public GameStateManager() { states = new Stack<State>(); }
+
+    public static GameStateManager getINSTANCE() {
+        if (INSTANCE == null) {
+            INSTANCE = new GameStateManager();
+        }
+        return INSTANCE;
+    }
+
+    private GameStateManager() { states = new Stack<State>(); }
 
     public void push(State state) { states.push(state); }
 
