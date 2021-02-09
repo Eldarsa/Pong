@@ -27,7 +27,7 @@ public class Pong extends ApplicationAdapter {
 		sr.setProjectionMatrix(sb.getProjectionMatrix());
 		gsm = GameStateManager.getINSTANCE();
 		Gdx.gl.glClearColor(0,0,0,1);
-		gsm.push(new MenuState(gsm));
+		gsm.push(MenuState.getINSTANCE());
 	}
 
 	@Override

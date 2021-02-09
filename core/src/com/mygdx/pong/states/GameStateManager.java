@@ -23,13 +23,6 @@ public class GameStateManager {
 
     private GameStateManager() { states = new Stack<State>(); }
 
-    public GameStateManager getINSTANCE() {
-        if(INSTANCE == null){
-            INSTANCE = new GameStateManager();
-        }
-        return INSTANCE;
-    };
-
     public void push(State state) { states.push(state); }
 
     public void pop() { states.pop(); }

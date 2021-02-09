@@ -9,16 +9,16 @@ import com.mygdx.pong.Pong;
 public class MenuState extends State{
 
     private Texture playBtn;
-    private MenuState INSTANCE = null;
+    private static MenuState INSTANCE = null;
 
-    public MenuState(GameStateManager gsm){
-        super(gsm);
+    public MenuState(){
+        super(gsm.getINSTANCE());
         playBtn = new Texture("playbtn.PNG");
     }
 
-    public MenuState getINSTANCE() {
+    public static MenuState getINSTANCE() {
         if (INSTANCE == null) {
-            INSTANCE = new MenuState(gsm);
+            INSTANCE = new MenuState();
         }
         return INSTANCE;
     }
@@ -26,7 +26,7 @@ public class MenuState extends State{
     @Override
     public void handleInput() {
         if (Gdx.input.justTouched()) {
-            gsm.set(new PlayState(gsm));
+            gsm.set(PlayState.getINSTANCE());
             dispose();
         }
     }

@@ -14,6 +14,9 @@ import com.mygdx.pong.sprites.Padel;
 import com.mygdx.pong.sprites.Sidewall;
 
 public class PlayState extends State {
+
+    private static PlayState INSTANCE = null;
+
     private static final int MAX_TIME = 6;
 
     public static final float wallDistanceFactor = 0.1f;
@@ -33,8 +36,8 @@ public class PlayState extends State {
     private Level level;
     private boolean recentlyIncrementedLevel;
 
-    protected PlayState(GameStateManager gsm) {
-        super(gsm);
+    protected PlayState() {
+        super(gsm.getINSTANCE());
 
         targetScore = 21;
         timer = new Timer(MAX_TIME);
@@ -50,6 +53,13 @@ public class PlayState extends State {
 
         scoreBoard = new ScoreBoard(leftPadel, rightPadel);
         recentlyIncrementedLevel = true;
+    }
+
+    public static PlayState getINSTANCE() {
+        if (INSTANCE == null) {
+            INSTANCE = new PlayState();
+        }
+        return INSTANCE;
     }
 
     private Vector2 calculateReturnDirection(Padel padel, Ball ball){
@@ -111,11 +121,11 @@ public class PlayState extends State {
             level.reset();
             ball.reset();
 
-            gsm.push(new PauseState(gsm));
+            gsm.push(PauseState.getINSTANCE());
         }
 
         if (rightPadel.getScore() >= targetScore || leftPadel.getScore() >= targetScore) {
-            gsm.set(new EndState(gsm));
+            gsm.set(EndState.getINSTANCE());
             dispose();
         }
     }

@@ -8,14 +8,10 @@ import com.badlogic.gdx.math.Vector3;
 
 public abstract class State {
 
-    protected OrthographicCamera cam;
-    protected Vector3 mouse;
     protected static GameStateManager gsm;
 
     protected State(GameStateManager gsm){
         this.gsm = gsm;
-        this.cam = new OrthographicCamera();
-        this.mouse = new Vector3();
     }
 
     public abstract void update(float dt);

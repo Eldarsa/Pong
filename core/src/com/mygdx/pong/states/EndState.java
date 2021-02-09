@@ -13,10 +13,10 @@ public class EndState extends State{
 
     private static EndState INSTANCE = null;
 
-    private static Texture playBtn;
-    private static BitmapFont font;
-    private static float fontsize;
-    private static Vector2 fontPos;
+    private Texture playBtn;
+    private BitmapFont font;
+    private float fontsize;
+    private Vector2 fontPos;
 
     private EndState(){
         super(gsm.getINSTANCE());
@@ -29,9 +29,9 @@ public class EndState extends State{
         fontPos = new Vector2(50, Pong.HEIGHT-50);
     }
 
-    public EndState getINSTANCE() {
+    public static EndState getINSTANCE() {
         if (INSTANCE == null) {
-            INSTANCE = new EndState(gsm);
+            INSTANCE = new EndState();
         }
         return INSTANCE;
     }
@@ -39,7 +39,7 @@ public class EndState extends State{
     @Override
     public void handleInput() {
         if (Gdx.input.justTouched()) {
-            gsm.set(new PlayState(gsm));
+            gsm.set(PlayState.getINSTANCE());
             dispose();
         }
     }
