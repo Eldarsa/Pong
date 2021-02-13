@@ -1,11 +1,11 @@
 # How to play
-Left player controll the padel with the keys W and S and right player with the arraows
+Left player control the paddle with the keys W and S and right player with the arrows
 
 # Singleton pattern
 
-
-# Pipe and filter
-
+We have applied the Singleton patter a few places where we found it suitable, which were with
+the GameStateManager- and State-subclasses. This was a natural decision as these classes are only
+intended to exist one instance of simultaneously.
 
 # Theory
 ## Task 4.a
