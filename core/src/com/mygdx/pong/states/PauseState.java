@@ -13,13 +13,22 @@ public class PauseState extends State{
     private BitmapFont font;
     private float fontsize;
 
-    public PauseState(GameStateManager gsm){
-        super(gsm);
+    private static PauseState INSTANCE = null;
+
+    public PauseState(){
+        super(gsm.getINSTANCE());
         playBtn = new Texture("playbtn.PNG");
 
         fontsize = 1f;
         font = new BitmapFont();
         font.getData().setScale(fontsize);
+    }
+
+    public static PauseState getINSTANCE() {
+        if (INSTANCE == null) {
+            INSTANCE = new PauseState();
+        }
+        return INSTANCE;
     }
 
     @Override
