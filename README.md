@@ -17,6 +17,13 @@ intended to exist one instance of simultaneously.
 - ECS: Architectural
 - Pipe and filter: Architectural
 
+Architectural patterns are in a sense design patterns on a higher level. Both are patterns, or
+solutions to a recurring problem, but the main difference is their scope. An architectural patten
+focuses more on the structure of the overall program (eg. MVC or ECS), how classes interact or how
+to communicate in the program. A design pattern focuses more on solution to smaller, more local problems.
+A design pattern can for example describe how to instantiate classes during runtime or how classes
+should behave different according to the state.
+
 ## Task 4.b and 4.c
 
 We have used the following patterns in our code:
